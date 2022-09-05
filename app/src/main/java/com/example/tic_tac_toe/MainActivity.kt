@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
                         else -> {playerTurn="X"; playerTurnTxt.text="PLAYER ${checkBoard(gameBoard)} WINS ";for(button in gameBoard) button.text=""      }
                     }
-
-
                 }
                 else if(playerTurn=="O")
                 {
@@ -66,6 +64,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkBoard(gameBoard: MutableList<Button>): CharSequence? {
+        return when {
+            //rows
+            (gameBoard[0].text!="") && gameBoard.slice(0..2).all{it.text==gameBoard[0].text} -> gameBoard[0].text
+            (gameBoard[3].text!="") && gameBoard.slice(3..5).all{it.text==gameBoard[3].text} -> gameBoard[3].text
+            (gameBoard[6].text!="") && gameBoard.slice(6..8).all{it.text==gameBoard[6].text} -> gameBoard[6].text
+            //columbs
+            (gameBoard[0].text!="") && gameBoard.slice(0..6 step 3).all{it.text==gameBoard[0].text} -> gameBoard[0].text
+            (gameBoard[1].text!="") && gameBoard.slice(1..7 step 3).all{it.text==gameBoard[1].text} -> gameBoard[1].text
+            (gameBoard[2].text!="") && gameBoard.slice(2..8 step 3).all{it.text==gameBoard[2].text} -> gameBoard[2].text
+            //cross
+            (gameBoard[0].text!="") && gameBoard.slice(setOf(0, 4 , 8)).all{it.text==gameBoard[0].text} -> gameBoard[0].text
+            (gameBoard[2].text!="") && gameBoard.slice(setOf(2, 4 , 6)).all{it.text==gameBoard[2].text} -> gameBoard[2].text
+            else -> if( gameBoard.any{it.text==""} ) "C" else "F"
+        }
+    }
+
+
+
+
+/*
+    private fun checkBoard(gameBoard: MutableList<Button>): CharSequence?
+     {
 
         //rows
         if(gameBoard.slice(0..2).all{it.text=="X"}) return "X"
@@ -75,21 +95,15 @@ class MainActivity : AppCompatActivity() {
         else if(gameBoard.slice(3..5).all{it.text=="O"}) return "O"
 
         if(gameBoard.slice(6..8).all{it.text=="X"}) return "X"
-
         else if(gameBoard.slice(6..8).all{it.text=="O"}) return "O"
         //Columbs
         if(gameBoard.slice(0..6 step 3).all{it.text=="X"})  return "X"
-
         else if(gameBoard.slice(0..6 step 3).all{it.text=="O"}) return "O"
 
         if(gameBoard.slice(1..7 step 3).all{it.text=="X"})  return "X"
-
         else if(gameBoard.slice(1..7 step 3).all{it.text=="O"}) return "O"
 
-
         if(gameBoard.slice(2..8 step 3).all{it.text=="X"})  return "X"
-
-
         else if(gameBoard.slice(2..8 step 3).all{it.text=="O"}) return "O"
 
         //cross
@@ -110,5 +124,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-}
+*/
 
+}
